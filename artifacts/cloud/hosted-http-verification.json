@@ -1,0 +1,119 @@
+{
+  "verifiedOn": "2026-10-13",
+  "origin": "https://meendoc.vercel.app",
+  "checks": 27,
+  "results": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/doctors",
+      "status": 200
+    },
+    {
+      "path": "/doctors/55555555-5555-4555-8555-000000000003",
+      "status": 200
+    },
+    {
+      "path": "/booking/55555555-5555-4555-8555-000000000003",
+      "status": 200
+    },
+    {
+      "path": "/account",
+      "status": 200
+    },
+    {
+      "path": "/appointments",
+      "status": 200
+    },
+    {
+      "path": "/favorites",
+      "status": 200
+    },
+    {
+      "path": "/login",
+      "status": 200
+    },
+    {
+      "path": "/register",
+      "status": 200
+    },
+    {
+      "path": "/otp",
+      "status": 200
+    },
+    {
+      "path": "/forgot-password",
+      "status": 200
+    },
+    {
+      "path": "/reset-password",
+      "status": 200
+    },
+    {
+      "path": "/join-as-doctor",
+      "status": 200
+    },
+    {
+      "path": "/admin",
+      "status": 200,
+      "verifiedLoginRedirect": true
+    },
+    {
+      "path": "/doctor/dashboard",
+      "status": 200,
+      "verifiedLoginRedirect": true
+    },
+    {
+      "path": "/api/me",
+      "status": 401
+    },
+    {
+      "path": "/api/appointments",
+      "status": 401
+    },
+    {
+      "path": "/api/admin/overview",
+      "status": 401
+    },
+    {
+      "path": "/api/doctor/profile",
+      "status": 401
+    },
+    {
+      "path": "/fonts/arabic-400.ttf",
+      "status": 200
+    },
+    {
+      "path": "/fonts/inter-400.ttf",
+      "status": 200
+    },
+    {
+      "path": "/images/fictional-doctors.png",
+      "status": 200
+    },
+    {
+      "path": "/api/health",
+      "status": 200
+    },
+    {
+      "path": "/api/specialties",
+      "status": 200
+    },
+    {
+      "path": "/api/locations",
+      "status": 200
+    },
+    {
+      "path": "/api/doctors?specialty=dermatology&governorate=cairo&maxFee=500",
+      "status": 200
+    },
+    {
+      "path": "/api/doctors/55555555-5555-4555-8555-000000000003/availability",
+      "status": 200
+    }
+  ],
+  "geminiRequests": 0,
+  "scope": "Production HTTP pages, assets, headers, public database API and guest authorization; authenticated workflows are verified separately."
+}

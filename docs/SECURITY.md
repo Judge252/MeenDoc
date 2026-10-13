@@ -35,7 +35,9 @@ Google is a third-party processor when live AI is selected. The consent UI expla
 
 ## Known limits and release requirements
 
-PGlite auth fixtures do not test hosted GoTrue, SMTP or physical browser cookie refresh. Separate live checks have verified hosted concurrent booking, password sign-in, account/provider linking, direct REST RLS and revoked sessions. Public deployment and Auth email delivery remain unverified. Mocked browser tests verify UI contracts, not cloud persistence.
+PGlite auth fixtures do not test hosted GoTrue, SMTP or physical browser cookie refresh. Separate live checks have verified concurrent booking, password sign-in, account/provider linking, direct REST RLS and revoked sessions. The public Vercel deployment additionally passed HTTPS cookie flags and controlled account/database workflows. Auth email delivery remains unverified. Mocked browser tests verify UI contracts, not cloud persistence.
+
+Gemini failure diagnostics retain only an allowlisted reason, numeric provider status and attempt number. They never retain the raw provider message, request URL, headers, key, stack trace or chat content. A security regression test covers this boundary; the configurable attempt cap prevents hidden verification retries.
 
 Navigation evidence/claim filters and explicit emergency examples are not validated clinical triage. They may miss or incorrectly classify requests. Obtain clinician, privacy and legal review and a real credential-verification workflow before genuine healthcare use.
 

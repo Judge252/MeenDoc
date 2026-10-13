@@ -44,6 +44,14 @@ test("one-attempt configuration prevents any hidden provider retry",async()=>{
     expect(call).toHaveBeenCalledOnce();
   }finally{vi.unstubAllEnvs();}
 });
+test("upstream gateway timeout is reported as an AI timeout",async()=>{
+  vi.stubEnv("GEMINI_MAX_ATTEMPTS","1");
+  const call=vi.fn(async()=>{throw {status:504};});
+  try{
+    await expect(new GeminiProvider({generateContent:call}).generate(input)).rejects.toMatchObject({status:504,code:"AI_TIMEOUT"});
+    expect(call).toHaveBeenCalledOnce();
+  }finally{vi.unstubAllEnvs();}
+});
 test("explicit specialty evidence is required; symptoms cannot silently become specialties",()=>{
   const result=enforceNavigation({...good,extractedPreferences:{...good.extractedPreferences,specialtyEvidence:"طفح"}}, "عندي طفح خيالي",emptyPreferences,directory,"ar");
   expect(result.preferences.specialty).toBe("all");expect(result.action).toBe("show_filters");expect(result.safety).toBe("uncertainty");

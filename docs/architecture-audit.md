@@ -1,5 +1,7 @@
 # MEENDOC MVP — Codebase Architecture Audit
 
+> Historical frontend-only audit from 12 October 2026, before the backend implementation. Its findings are not the current architecture or deployment status. See [ARCHITECTURE.md](ARCHITECTURE.md) and [PROJECT_STATUS.md](PROJECT_STATUS.md) for the connected implementation and verified results.
+
 Audit date: 2026-10-12. Scope: read-only inspection of application source, configuration, and tests. No application files were changed and no tests were executed. Runtime behavior and live deployment remain **UNKNOWN**.
 
 Source paths below are relative to `D:\my  business\MEENDOC`.

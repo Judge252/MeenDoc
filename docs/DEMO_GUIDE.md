@@ -1,6 +1,6 @@
 # Demonstration guide
 
-Every presentation must name the mode visible in the banner. The approved Supabase project is connected and the core live API/Auth/Postgres workflows are verified. Real Arabic/English Gemini responses reached the browser; the English result returned a matching database card after one timeout retry. Fictional clinicians and bookings remain explicitly disclosed even after real backend activation.
+Every presentation must name the mode visible in the banner. The approved Supabase project is connected and core live API/Auth/Postgres workflows are verified locally and on https://meendoc.vercel.app. Real Arabic/English Gemini responses reached the local browser; the English result returned a matching database card after one timeout retry. The separately authorized hosted English case failed with an upstream Google HTTP 504. Use manual filters/labeled scenarios unless a new live test budget is agreed. Fictional clinicians and bookings remain explicitly disclosed.
 
 ## Offline presentation, available now
 
@@ -16,7 +16,7 @@ This mode demonstrates interface behavior. It does not demonstrate Gemini, email
 
 ## Technical patient presentation
 
-1. Open the configured technical demo. Locally use APP_MODE=demo at http://127.0.0.1:3000; the authorized production hostname is https://meendoc.vercel.app. Check PROJECT_STATUS.md for the verified deployment state.
+1. Open https://meendoc.vercel.app (or the connected local APP_MODE=demo at http://127.0.0.1:3000). The public deployment's account/database workflows and actual booking/reload/cancellation are verified; check PROJECT_STATUS.md for separate AI/email limits.
 2. Use a confirmed controlled patient account for booking; guest browsing/chat needs no account.
 3. With real AI enabled and an agreed request budget, type: “عايز دكتور جلدية في اسكندرية والكشف ميعديش ٥٠٠ جنيه.” Accept adult/fictional/Google processing consent.
 4. Show the actual network response and matching database cards; verify all returned records meet location, specialty and fee criteria. No invented provider identities are accepted.
@@ -46,4 +46,3 @@ Verify patient denial of every admin/doctor resource, provider ownership, admin 
 For the existing controlled fixtures, open .meendoc-test-accounts.private.json locally and choose patient1/patient2/doctor/admin. Enter those credentials at /login; do not publish the file. Patient: directory → Dr. Laila Adel → actual clinic/date/slot → booking → appointments/reload → cancel. Doctor: /doctor/dashboard → owned draft biography/save/reload; its test clinic is deliberately inactive. Admin: /admin → overview, approved application/account link, catalog and audit tabs. Final application reviews are read-only. Use the setup/onboarding sequence above for a new provider.
 
 No further Gemini generation is included in the completed test authorization. A new live demonstration consumes quota and requires its agreed request budget; manual filters or labeled examples exercise the real database without Google. Signup/OTP/recovery email demonstrations are pending a usable SMTP provider and actual inbox/link verification.
-

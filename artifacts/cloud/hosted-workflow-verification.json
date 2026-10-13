@@ -1,0 +1,20 @@
+{
+  "verifiedOn": "2026-10-13",
+  "origin": "https://meendoc.vercel.app",
+  "projectRef": "mofdzltldjwkalvkkbvk",
+  "checks": [
+    "Hosted GoTrue login for four controlled accounts; Secure/HTTP-only/SameSite cookies and current roles",
+    "Fifteen hosted management resources enforce guest/patient denial",
+    "Hosted concurrent booking: one success/one conflict, database fee, idempotency and persisted read",
+    "Hosted ownership denial, rescheduling and cancellation release actual slots",
+    "Hosted favorites and notification read status persist",
+    "Hosted linked draft provider, owned edit, cross-provider denial and protected admin overview",
+    "Hosted labeled manual/scripted matching uses PostgreSQL without Gemini",
+    "Hosted logout revokes each controlled session"
+  ],
+  "geminiRequests": 0,
+  "authEmailDelivery": "unverified; controlled accounts were admin-confirmed",
+  "newAccounts": 0,
+  "newProviderFixtures": 0,
+  "appointmentReference": "MD-67184D0E2CCA"
+}

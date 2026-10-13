@@ -1,6 +1,6 @@
-# Deployment preparation
+# Deployment and release verification
 
-The user approved GitHub Judge252/MeenDoc and the existing Vercel project judge252s-projects/meendoc. The local CLI verified and linked project prj_70i615YEtWUoh73niKmLoPcNKGo7 under team_JkMVXzABIkxw16PkKKUvZJSh. The connector lacks this scope; no unrelated team was changed. Git was initialized in the actual MEENDOC workspace with that exact origin. Source push/deployment verification is in progress; see PROJECT_STATUS.md for final results.
+The user approved GitHub Judge252/MeenDoc and the existing Vercel project judge252s-projects/meendoc. The local CLI verified and linked project prj_70i615YEtWUoh73niKmLoPcNKGo7 under team_JkMVXzABIkxw16PkKKUvZJSh. The connector lacks this scope; no unrelated team was changed. Source is pushed to main and automatic Git-linked production builds reached READY. The canonical URL is https://meendoc.vercel.app. Hosted HTTP and controlled account/database checks passed; see PROJECT_STATUS.md for exact AI and SMTP results.
 
 ## Release sequence
 
@@ -17,7 +17,7 @@ Do not publish credentials, make private tables public, disable RLS, enable anon
 ## Prepared runtime settings
 
 - APIs run in Node.js; no separate backend host is needed.
-- vercel.json schedules /api/internal/slots/refresh once daily at 02:00 UTC. Vercel passes Bearer CRON_SECRET; configure it before enabling the deployment. This schedule is currently only a file.
+- The deployed vercel.json schedules /api/internal/slots/refresh once daily at 02:00 UTC, with Production CRON_SECRET configured. Vercel supplies its Bearer credential. The scheduled execution itself remains unverified; slot generation was verified through the database/API workflows.
 - The refresh endpoint generates BOOKING_WINDOW_DAYS slots (default 14) while preserving booked records.
 - HTTP-only cookies use Secure on an HTTPS app URL, SameSite=Lax and the application path. Authenticated responses are private/no-store. Admin/doctor layouts are dynamic and server-gated in demo mode.
 - next.config.ts security headers and the existing local asset/font pipeline are retained. Review any external host additions before changing policy.
@@ -38,7 +38,6 @@ Run Supabase security/performance advisors after migration. Monitor shared AI re
 
 Revert a faulty app deployment to the previously verified version while preserving database data. Use a forward corrective migration for schema fixes. Backup restoration, data deletion, key rotation and any paid upgrade require their appropriate explicit authorization.
 
-The production domain is https://meendoc.vercel.app. Framework/build/install settings are Next.js, npm run build and npm ci, with Node 24. Eighteen Production variables were configured through CLI stdin; Gemini/Supabase/rate/cron secrets use Secret type and private test files are excluded from Git and deployment uploads. Production rate/cron secrets are separate from local values. There are no Preview/Development application variables. Supabase's production/local redirects are configured.
+The production domain is https://meendoc.vercel.app. Framework/build/install settings are Next.js, npm run build and npm ci, with Node 24. Nineteen Production variables were configured through CLI stdin; Gemini/Supabase/rate/cron secrets use Secret type and private test files are excluded from Git and deployment uploads. Production rate/cron secrets are separate from local values. GEMINI_MAX_ATTEMPTS=1 ensures one provider attempt per hosted request; the local/example default allows at most two. There are no Preview/Development application variables. Supabase's production/local redirects are configured.
 
-After a reviewed source push, inspect the exact deployment and wait for READY; run npm run verify:http -- https://meendoc.vercel.app and npm run verify:deployment. These checks make no Gemini or email requests. Manual local production HTTP verification passed 27 checks, including streaming Next.js page redirects and API 401s.
-
+After each reviewed source push, inspect the exact deployment and wait for READY. Run node scripts/verify-http.mjs https://meendoc.vercel.app for read-only HTTP checks; npm run verify:deployment deliberately mutates the existing controlled fictional accounts/bookings and revokes their sessions. Neither script makes Gemini or email requests. Hosted verification passed 27 HTTP checks and eight controlled workflows, separately from the 27 local compiled-server checks. Protected Next pages may return a streamed 200 with verified login redirect metadata; their protected APIs return 401.

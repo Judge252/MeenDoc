@@ -4,7 +4,9 @@ Implementation checkpoint: 13 October 2026. This extends the approved Arabic RTL
 
 ```mermaid
 flowchart LR
-  UI["Existing React UI"] --> BFF["Next.js Node Route Handlers"]
+  REPO["GitHub Judge252/MeenDoc: main"] --> HOST["Vercel meendoc.vercel.app: deployed"]
+  HOST --> UI["Existing React UI"]
+  UI --> BFF["Next.js Node Route Handlers"]
   BFF --> V["Zod + origin, role and ownership checks"]
   V --> S["Modular services and catalog repository"]
   S --> AUTH["Supabase Auth: sign-in and revocation verified"]
@@ -51,3 +53,5 @@ The browser holds chat text only in memory and sends bounded context for each re
 Independent directory/notification reads are batched. Responses that depend on cookies use no-store/private caching. Session refresh is a proxy concern; authorization is repeated in services and PostgreSQL.
 
 No extra backend service, Redis, queue, vector store, payment service or external analytics SDK was added.
+
+The canonical Vercel production application passed 27 public HTTPS checks and eight controlled Auth/database workflows. All four privileged secrets are confined to Production server settings. SMTP is an external pending connection; signup/OTP/recovery delivery is not represented as a working edge in the diagram.

@@ -1,0 +1,35 @@
+{
+  "verifiedOn": "2026-10-13",
+  "origin": "https://meendoc.vercel.app",
+  "provider": "Google Gemini",
+  "model": "gemini-3.5-flash-lite",
+  "test": "One approved fictional English directory-search case",
+  "criteria": {
+    "specialty": "dermatology",
+    "governorate": "cairo",
+    "maxFee": 500
+  },
+  "approvedAttemptCap": 2,
+  "uiSubmissions": 2,
+  "result": "blocked by upstream provider timeout; no successful English result claimed",
+  "firstApplicationError": "AI_UNAVAILABLE",
+  "latestProviderStatus": 504,
+  "latestLoggedAttempt": 1,
+  "retryDeploymentCommit": "1162c10ef9d91f075a6a92ae9c49f3a8505a4d61",
+  "retryServerAttemptCap": 1,
+  "maxOutputTokens": 700,
+  "timeoutMs": 30000,
+  "rawChatStored": false,
+  "credentialsLogged": false,
+  "remainingAuthorizedAttempts": 0,
+  "nextAction": "A later live verification requires a new bounded request authorization; manual/scripted database search remains verified.",
+  "productionAggregateUsage": [
+    {
+      "request_count": 3,
+      "token_count": 759,
+      "model": "gemini-3.5-flash-lite",
+      "window_start": "2026-10-13T00:00:00+00:00"
+    }
+  ],
+  "aggregateUsageScope": "Includes earlier hosted usage; not attributed solely to this failed English case. Timeout provider spend may be unreported."
+}

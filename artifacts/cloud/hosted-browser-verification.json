@@ -1,0 +1,18 @@
+{
+  "verifiedOn": "2026-10-13",
+  "origin": "https://meendoc.vercel.app",
+  "mode": "demo",
+  "syntheticOnly": true,
+  "doctorId": "55555555-5555-4555-8555-000000000003",
+  "appointmentReference": "MD-4B31F8D39A45",
+  "feeSnapshot": 500,
+  "checks": [
+    "Actual database profile, clinic, date and available slot displayed",
+    "Controlled patient authenticated through the booking gate",
+    "Database booking returned an MD reference and clinic fee",
+    "Appointment survived full page reload on the hosted appointments route",
+    "Cancellation completed and the same reference remains in cancelled history"
+  ],
+  "authEmailDelivery": "unverified; controlled account was admin-confirmed",
+  "screenshot": "artifacts/qa/hosted-booking-confirmation.png"
+}

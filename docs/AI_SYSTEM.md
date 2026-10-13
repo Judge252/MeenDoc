@@ -29,7 +29,7 @@ Live outages, invalid output, timeout and quota failure are visible. The user ca
 
 ## Limits and privacy
 
-Code/example default timeout 15 seconds, configurable 1–30 seconds. The current local .env uses 30 seconds after the verified live timeout recovery. Default output limit 700 tokens, input message ≤1000 characters, provider history 12 messages, combined context 12,000 characters. At most one retry for transient provider errors, with a new shared budget reservation before each attempt; provider 429 and invalid output do not retry.
+Code/example default timeout 15 seconds, configurable 1–30 seconds. The current local and Production settings use 30 seconds after the verified live timeout recovery. Default output limit 700 tokens, input message ≤1000 characters, provider history 12 messages, combined context 12,000 characters. GEMINI_MAX_ATTEMPTS is one or two (default two); Production currently uses one to keep the approved hosted test budget exact. When two are allowed, at most one transient provider retry reserves another shared request; provider 429 and invalid output do not retry. Operational failures log only a numeric status, allowlisted reason and attempt number, never provider messages or chat text.
 
 Default limits: 20 assistant requests/hour per pseudonymous ingress/session/user and 200 provider attempts/day globally. Counters are stored in PostgreSQL, not process memory. Fixed daily usage windows are UTC. HMAC subjects use RATE_LIMIT_SECRET. The admin UI shows counts/tokens and an 80% request-limit warning; these counters are not a provider invoice or exact cost measurement.
 
