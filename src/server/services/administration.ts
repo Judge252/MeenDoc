@@ -4,11 +4,12 @@ import { adminClient } from "@/lib/supabase/admin";
 import { databaseError,ApiError } from "../http";
 import { directory,locations } from "../repositories/catalog";
 import { configuration } from "../config";
+import { pseudonym } from "./limits";
 export async function adminOverview(){
   await authorize("admin");const db=adminClient();
   const resources=["doctors","doctor_applications","appointments","feedback","privacy_requests"] as const;
   const result=await Promise.all(resources.map(async(table)=>{const r=await db.from(table).select("id",{count:"exact",head:true});databaseError(r.error);return [table,r.count||0] as const;}));
-  const usage=await db.from("ai_usage_counters").select("request_count,token_count,model,window_start").eq("scope","ai_global").order("window_start",{ascending:false}).limit(7);databaseError(usage.error);
+  const usage=await db.from("ai_usage_counters").select("request_count,token_count,model,window_start").eq("scope","ai_global").eq("subject_hash",pseudonym("ai_global:global")).order("window_start",{ascending:false}).limit(7);databaseError(usage.error);
   const today=new Date(Math.floor(Date.now()/86400000)*86400000).toISOString(),requests=usage.data?.find(u=>new Date(u.window_start).toISOString()===today)?.request_count||0,limit=configuration().AI_DAILY_USAGE_LIMIT;
   return {counts:Object.fromEntries(result),aiUsage:usage.data||[],aiBudget:{requests,limit,warning:requests>=Math.floor(limit*0.8)}};
 }
