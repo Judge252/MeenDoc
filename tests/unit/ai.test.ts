@@ -27,6 +27,15 @@ test("one transient retry is controlled and reserves another request",async()=>{
   await new GeminiProvider({generateContent:call}).generate({...input,beforeAttempt:before});
   expect(call).toHaveBeenCalledTimes(2);expect(before).toHaveBeenCalledTimes(2);
 });
+test("provider diagnostics retain only safe failure metadata",async()=>{
+  const log=vi.spyOn(console,"error").mockImplementation(()=>{});
+  try{
+    const provider=new GeminiProvider({generateContent:async()=>{throw Object.assign(new Error("API key invalid; secret-example; fictional private message"),{status:400});}});
+    await expect(provider.generate(input)).rejects.toMatchObject({code:"AI_UNAVAILABLE"});
+    expect(log).toHaveBeenCalledWith(JSON.stringify({event:"gemini_failure",status:400,reason:"key_invalid",attempt:1}));
+    expect(JSON.stringify(log.mock.calls)).not.toMatch(/secret-example|private message/);
+  }finally{log.mockRestore();}
+});
 test("explicit specialty evidence is required; symptoms cannot silently become specialties",()=>{
   const result=enforceNavigation({...good,extractedPreferences:{...good.extractedPreferences,specialtyEvidence:"طفح"}}, "عندي طفح خيالي",emptyPreferences,directory,"ar");
   expect(result.preferences.specialty).toBe("all");expect(result.action).toBe("show_filters");expect(result.safety).toBe("uncertainty");

@@ -24,6 +24,14 @@ export class GeminiProvider implements AIProvider{
       }catch(error){
         if(error instanceof ApiError)throw error;
         const status=typeof error==="object"&&error!==null?Number((error as {status?:number}).status):0;
+        // Classify failures without retaining provider messages, URLs, headers,
+        // keys, chat text or stack traces in operational logs.
+        const detail=error instanceof Error?error.message.toLowerCase():"";
+        const reason=/(location|region).*?(not supported|unsupported)/.test(detail)?"location_unsupported":
+          /api key.*?(not valid|invalid)/.test(detail)?"key_invalid":
+          /api key.*?(blocked|restricted)|permission denied/.test(detail)?"access_denied":
+          status===404?"model_unavailable":signal.aborted?"timeout":status?"provider_http":"transport_failure";
+        console.error(JSON.stringify({event:"gemini_failure",status:Number.isInteger(status)&&status>=100&&status<=599?status:0,reason,attempt:attempt+1}));
         if(status===429)throw new ApiError(429,"AI_QUOTA_EXCEEDED","Gemini quota is exhausted. Use the labeled scripted mode or try later.",60);
         if(signal.aborted)throw new ApiError(504,"AI_TIMEOUT","Gemini did not respond in time.");
         if(attempt===0&&[500,502,503,504].includes(status)){await new Promise(resolve=>setTimeout(resolve,150));continue;}
