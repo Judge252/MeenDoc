@@ -1,0 +1,22 @@
+{
+  "projectRef": "mofdzltldjwkalvkkbvk",
+  "checks": [
+    "live API database health",
+    "real GoTrue password sign-in and HTTP-only BFF cookies for four controlled accounts",
+    "15 privileged live API resources deny guests/patients and ignore malicious user metadata",
+    "published profiles and matching/availability come from hosted PostgreSQL",
+    "two real patients compete concurrently: one booking, one conflict; repeat key is idempotent",
+    "cross-patient cancellation denied; reschedule/cancel release real slots",
+    "favorites, profile, in-app notifications and pending privacy request persist",
+    "application approval creates linked draft/unverified provider; owned clinic/schedule/profile/appointments work",
+    "provider cannot edit another provider or grant verification",
+    "hosted direct REST RLS prevents private reads/escalation; global logout revokes existing JWT session access",
+    "labeled scripted assistant/manual filters query hosted catalog without a Gemini request"
+  ],
+  "cloudVerified": true,
+  "realGeminiCalls": 0,
+  "authFixtureConfirmation": "admin-confirmed fictional accounts; email delivery unverified",
+  "controlledAccounts": 4,
+  "applicationId": "52bfd784-f6d7-4688-b4ea-c5fc2e279bb5",
+  "providerId": "2befb399-53d4-4a8f-8ac6-d12969682b9a"
+}

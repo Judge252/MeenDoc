@@ -1,0 +1,25 @@
+{
+  "projectRef": "mofdzltldjwkalvkkbvk",
+  "provider": "Google Gemini",
+  "sdkSmokeRequests": 4,
+  "sdkReportedTokens": 2606,
+  "liveUiTests": 2,
+  "liveUiProviderAttempts": 3,
+  "englishTimeoutMs": 15000,
+  "successfulRetryTimeoutMs": 30000,
+  "rawChatStored": false,
+  "usage": [
+    {
+      "window_start": "2026-10-13T00:00:00+00:00",
+      "request_count": 2,
+      "token_count": 799,
+      "model": "gemini-3.5-flash-lite"
+    },
+    {
+      "window_start": "2026-10-12T00:00:00+00:00",
+      "request_count": 1,
+      "token_count": 785,
+      "model": "gemini-3.5-flash-lite"
+    }
+  ]
+}

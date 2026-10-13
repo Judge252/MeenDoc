@@ -1,0 +1,31 @@
+{
+  "verifiedOn": "2026-10-13",
+  "mode": "demo",
+  "project": "mofdzltldjwkalvkkbvk",
+  "checks": [
+    {
+      "name": "Live English Gemini to database result",
+      "result": "passed",
+      "doctorId": "55555555-5555-4555-8555-000000000003",
+      "fee": 500
+    },
+    {
+      "name": "Real patient login and clinic-specific booking",
+      "result": "passed",
+      "reference": "MD-B5E39347C6E6"
+    },
+    {
+      "name": "Appointment persists after full reload",
+      "result": "passed"
+    },
+    {
+      "name": "Cancellation retained in database and cancelled tab",
+      "result": "passed"
+    },
+    {
+      "name": "Saved doctor persists after full reload",
+      "result": "passed"
+    }
+  ],
+  "syntheticOnly": true
+}

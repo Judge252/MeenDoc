@@ -1,0 +1,10 @@
+import { respond } from "@/server/http";
+import { route } from "@/server/router";
+export const runtime="nodejs";
+export const dynamic="force-dynamic";
+type Context={params:Promise<{path:string[]}>};
+const handler=async(request:Request,context:Context)=>respond(async()=>route(request,(await context.params).path));
+export const GET=handler;
+export const POST=handler;
+export const PATCH=handler;
+export const DELETE=handler;

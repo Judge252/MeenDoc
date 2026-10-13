@@ -1,0 +1,10 @@
+.env*
+.meendoc-test-*
+.next/
+.next-test/
+node_modules/
+test-results/
+playwright-report/
+artifacts/
+*.tsbuildinfo
+*.docx

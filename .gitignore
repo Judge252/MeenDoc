@@ -1,0 +1,15 @@
+node_modules/
+.next/
+.next-test/
+.vercel/
+supabase/.temp/
+out/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env*
+!.env.example
+.meendoc-test-*
+# Original local product references are kept outside the published source.
+/MEENDOC PDR.docx
+/MEENDOC_Egypt_Project_Design_Requirements_v1.md
