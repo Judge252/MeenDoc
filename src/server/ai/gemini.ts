@@ -10,7 +10,7 @@ export class GeminiProvider implements AIProvider{
     const c=configuration();
     if(!c.GEMINI_API_KEY&&!this.transport)throw new ApiError(503,"AI_UNAVAILABLE","Gemini is not configured.");
     const transport=this.transport||new GoogleGenAI({apiKey:c.GEMINI_API_KEY,httpOptions:{timeout:c.GEMINI_TIMEOUT_MS,retryOptions:{attempts:1}}}).models;
-    for(let attempt=0;attempt<2;attempt++){
+    for(let attempt=0;attempt<c.GEMINI_MAX_ATTEMPTS;attempt++){
       await input.beforeAttempt?.();
       const signal=AbortSignal.timeout(c.GEMINI_TIMEOUT_MS);
       try{
@@ -34,7 +34,7 @@ export class GeminiProvider implements AIProvider{
         console.error(JSON.stringify({event:"gemini_failure",status:Number.isInteger(status)&&status>=100&&status<=599?status:0,reason,attempt:attempt+1}));
         if(status===429)throw new ApiError(429,"AI_QUOTA_EXCEEDED","Gemini quota is exhausted. Use the labeled scripted mode or try later.",60);
         if(signal.aborted)throw new ApiError(504,"AI_TIMEOUT","Gemini did not respond in time.");
-        if(attempt===0&&[500,502,503,504].includes(status)){await new Promise(resolve=>setTimeout(resolve,150));continue;}
+        if(attempt+1<c.GEMINI_MAX_ATTEMPTS&&[500,502,503,504].includes(status)){await new Promise(resolve=>setTimeout(resolve,150));continue;}
         throw new ApiError(503,"AI_UNAVAILABLE","Gemini could not complete this request.");
       }
     }

@@ -15,7 +15,7 @@ let secrets;
 try{secrets=JSON.parse(await fs.readFile(privatePath,'utf8'));}catch(error){if(error.code!=='ENOENT')throw error;secrets={RATE_LIMIT_SECRET:randomBytes(48).toString('hex'),CRON_SECRET:randomBytes(48).toString('hex')};await fs.writeFile(privatePath,JSON.stringify(secrets),{flag:'wx',mode:0o600});}
 const values={APP_MODE:'demo',DEMO_SAFE_MODE:'true',NEXT_PUBLIC_APP_URL:'https://meendoc.vercel.app',NEXT_PUBLIC_SUPABASE_URL:local.NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:local.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
   ...(local.SUPABASE_SECRET_KEY?{SUPABASE_SECRET_KEY:local.SUPABASE_SECRET_KEY}:{SUPABASE_SERVICE_ROLE_KEY:local.SUPABASE_SERVICE_ROLE_KEY}),
-  GEMINI_API_KEY:local.GEMINI_API_KEY,GEMINI_MODEL:local.GEMINI_MODEL||'gemini-3.5-flash-lite',LIVE_AI_ENABLED:'true',GEMINI_TIMEOUT_MS:'30000',AI_REQUEST_LIMIT_PER_HOUR:'20',AI_DAILY_USAGE_LIMIT:'200',AI_MAX_OUTPUT_TOKENS:'700',AI_MAX_HISTORY_MESSAGES:'12',AI_MAX_CONTEXT_CHARACTERS:'12000',BOOKING_WINDOW_DAYS:'14',...secrets};
+  GEMINI_API_KEY:local.GEMINI_API_KEY,GEMINI_MODEL:local.GEMINI_MODEL||'gemini-3.5-flash-lite',LIVE_AI_ENABLED:'true',GEMINI_TIMEOUT_MS:'30000',GEMINI_MAX_ATTEMPTS:'1',AI_REQUEST_LIMIT_PER_HOUR:'20',AI_DAILY_USAGE_LIMIT:'200',AI_MAX_OUTPUT_TOKENS:'700',AI_MAX_HISTORY_MESSAGES:'12',AI_MAX_CONTEXT_CHARACTERS:'12000',BOOKING_WINDOW_DAYS:'14',...secrets};
 const privateNames=new Set(['SUPABASE_SECRET_KEY','SUPABASE_SERVICE_ROLE_KEY','GEMINI_API_KEY','RATE_LIMIT_SECRET','CRON_SECRET']);
 const redact=output=>Object.entries(values).reduce((text,[key,value])=>privateNames.has(key)&&value?text.split(value).join('[redacted]'):text,output);
 for(const [name,value] of Object.entries(values)){

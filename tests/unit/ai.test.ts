@@ -36,6 +36,14 @@ test("provider diagnostics retain only safe failure metadata",async()=>{
     expect(JSON.stringify(log.mock.calls)).not.toMatch(/secret-example|private message/);
   }finally{log.mockRestore();}
 });
+test("one-attempt configuration prevents any hidden provider retry",async()=>{
+  vi.stubEnv("GEMINI_MAX_ATTEMPTS","1");
+  const call=vi.fn(async()=>{throw {status:503};});
+  try{
+    await expect(new GeminiProvider({generateContent:call}).generate(input)).rejects.toMatchObject({code:"AI_UNAVAILABLE"});
+    expect(call).toHaveBeenCalledOnce();
+  }finally{vi.unstubAllEnvs();}
+});
 test("explicit specialty evidence is required; symptoms cannot silently become specialties",()=>{
   const result=enforceNavigation({...good,extractedPreferences:{...good.extractedPreferences,specialtyEvidence:"طفح"}}, "عندي طفح خيالي",emptyPreferences,directory,"ar");
   expect(result.preferences.specialty).toBe("all");expect(result.action).toBe("show_filters");expect(result.safety).toBe("uncertainty");

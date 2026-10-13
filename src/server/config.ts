@@ -13,6 +13,7 @@ const schema = z.object({
   GEMINI_MODEL:z.string().regex(/^gemini-[a-z0-9.-]+$/).default("gemini-3.5-flash-lite"),
   LIVE_AI_ENABLED:flag.default(false),
   GEMINI_TIMEOUT_MS:z.coerce.number().int().min(1000).max(30000).default(15000),
+  GEMINI_MAX_ATTEMPTS:z.coerce.number().int().min(1).max(2).default(2),
   AI_REQUEST_LIMIT_PER_HOUR:z.coerce.number().int().min(1).max(100).default(20),
   AI_DAILY_USAGE_LIMIT:z.coerce.number().int().min(1).max(10000).default(200),
   AI_MAX_OUTPUT_TOKENS:z.coerce.number().int().min(100).max(1500).default(700),
